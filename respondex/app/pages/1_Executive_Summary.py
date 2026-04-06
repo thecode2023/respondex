@@ -7,34 +7,10 @@ import streamlit as st
 import pandas as pd
 from utils.db import get_kpi_summary, get_monthly_trends, get_daily_trends
 from utils.charts import line_chart, bar_chart, COLORS
+from utils.styles import inject_dashboard_css
 
 st.set_page_config(page_title="Executive Summary | Respondex", layout="wide", page_icon="📊")
-
-st.markdown("""
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Newsreader:wght@400;600;700&display=swap');
-    div[data-testid="stMetric"] {
-        background: #1A1D29;
-        border: 1px solid rgba(108, 99, 255, 0.2);
-        border-radius: 8px;
-        padding: 1rem;
-    }
-    div[data-testid="stMetric"] label {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-    }
-    .takeaway-box {
-        background: rgba(108, 99, 255, 0.08);
-        border-left: 3px solid #6C63FF;
-        padding: 0.8rem 1rem;
-        margin: 0.5rem 0;
-        border-radius: 0 6px 6px 0;
-        font-size: 0.9rem;
-    }
-</style>
-""", unsafe_allow_html=True)
+inject_dashboard_css()
 
 st.title("Executive Summary")
 st.caption("High-level operational performance across all Boston 311 service requests")

@@ -7,27 +7,10 @@ import streamlit as st
 import pandas as pd
 from utils.db import get_category_breakdown, get_unique_category_groups
 from utils.charts import bar_chart, donut_chart, COLORS
+from utils.styles import inject_dashboard_css
 
 st.set_page_config(page_title="Category Deep Dive | Respondex", layout="wide", page_icon="📊")
-
-st.markdown("""
-<style>
-    div[data-testid="stMetric"] {
-        background: #1A1D29;
-        border: 1px solid rgba(108, 99, 255, 0.2);
-        border-radius: 8px;
-        padding: 1rem;
-    }
-    .takeaway-box {
-        background: rgba(108, 99, 255, 0.08);
-        border-left: 3px solid #6C63FF;
-        padding: 0.8rem 1rem;
-        margin: 0.5rem 0;
-        border-radius: 0 6px 6px 0;
-        font-size: 0.9rem;
-    }
-</style>
-""", unsafe_allow_html=True)
+inject_dashboard_css()
 
 st.title("Category Deep Dive")
 st.caption("Incident distribution and SLA performance by service category")

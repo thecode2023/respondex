@@ -10,3 +10,5 @@ data/respondex.db
 dist/
 build/
 app/data/
+.streamlit/secrets.toml
+app/.streamlit/secrets.toml

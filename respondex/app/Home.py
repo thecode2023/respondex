@@ -42,6 +42,20 @@ st.markdown(f"""
         background: #0A1122 !important;
         border-right: 1px solid rgba(255,255,255,0.04) !important;
     }}
+    section[data-testid="stSidebar"] * {{
+        color: #CBD5E1 !important;
+    }}
+    section[data-testid="stSidebar"] a {{
+        color: #E2E8F0 !important;
+    }}
+    section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"] span {{
+        color: #CBD5E1 !important;
+        font-size: 0.95rem !important;
+    }}
+    section[data-testid="stSidebar"] [aria-selected="true"] span {{
+        color: #FFFFFF !important;
+        font-weight: 600 !important;
+    }}
     .block-container {{
         padding: 0 !important;
         max-width: 100% !important;
@@ -87,10 +101,10 @@ st.markdown(f"""
     .hero-title {{
         position: relative;
         z-index: 1;
-        font-family: 'Inter', sans-serif;
-        font-size: clamp(3.5rem, 9vw, 7.5rem);
-        font-weight: 900;
-        color: #FFFFFF;
+        font-family: 'Inter', sans-serif !important;
+        font-size: clamp(3.5rem, 9vw, 7.5rem) !important;
+        font-weight: 900 !important;
+        color: #FFFFFF !important;
         letter-spacing: -0.04em;
         line-height: 0.95;
         margin: 0;
@@ -101,7 +115,7 @@ st.markdown(f"""
         font-family: 'Inter', sans-serif;
         font-size: clamp(1rem, 1.8vw, 1.2rem);
         font-weight: 400;
-        color: rgba(255,255,255,0.45);
+        color: rgba(255,255,255,0.7);
         margin-top: 1.8rem;
         max-width: 600px;
         line-height: 1.75;

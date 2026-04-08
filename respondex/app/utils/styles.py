@@ -14,6 +14,23 @@ DASHBOARD_CSS = """
         background: #0A1122 !important;
         border-right: 1px solid rgba(255,255,255,0.04) !important;
     }
+    section[data-testid="stSidebar"] * {
+        color: #CBD5E1 !important;
+    }
+    section[data-testid="stSidebar"] a {
+        color: #E2E8F0 !important;
+    }
+    section[data-testid="stSidebar"] a:hover {
+        color: #FFFFFF !important;
+    }
+    section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"] span {
+        color: #CBD5E1 !important;
+        font-size: 0.95rem !important;
+    }
+    section[data-testid="stSidebar"] [aria-selected="true"] span {
+        color: #FFFFFF !important;
+        font-weight: 600 !important;
+    }
 
     /* ========== TYPOGRAPHY ========== */
     h1 {
@@ -36,10 +53,10 @@ DASHBOARD_CSS = """
     }
     .stCaption, [data-testid="stCaptionContainer"] {
         font-family: 'JetBrains Mono', monospace !important;
-        font-size: 0.7rem !important;
+        font-size: 0.72rem !important;
         letter-spacing: 0.1em !important;
         text-transform: uppercase !important;
-        color: #475569 !important;
+        color: #94A3B8 !important;
     }
 
     /* ========== KPI CARDS ========== */
@@ -63,10 +80,13 @@ DASHBOARD_CSS = """
     }
     div[data-testid="stMetric"] [data-testid="stMetricValue"] {
         font-family: 'Inter', sans-serif !important;
-        font-size: 2.2rem !important;
+        font-size: 1.8rem !important;
         font-weight: 800 !important;
         color: #FFFFFF !important;
         letter-spacing: -0.02em !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: unset !important;
     }
     div[data-testid="stMetric"] [data-testid="stMetricDelta"] {
         font-family: 'JetBrains Mono', monospace !important;
@@ -133,11 +153,14 @@ DASHBOARD_CSS = """
     section[data-testid="stSidebar"] h2,
     section[data-testid="stSidebar"] h3 {
         font-family: 'Inter', sans-serif !important;
-        font-size: 0.78rem !important;
+        font-size: 0.8rem !important;
         font-weight: 600 !important;
         text-transform: uppercase !important;
         letter-spacing: 0.1em !important;
-        color: #64748B !important;
+        color: #94A3B8 !important;
+    }
+    section[data-testid="stSidebar"] label {
+        color: #CBD5E1 !important;
     }
 
     /* ========== EXPANDERS ========== */

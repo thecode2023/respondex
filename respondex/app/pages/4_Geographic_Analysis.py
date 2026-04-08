@@ -8,13 +8,15 @@ import pandas as pd
 import plotly.express as px
 from utils.db import get_neighborhood_data, query
 from utils.charts import bar_chart, apply_theme, COLORS, PALETTE
-from utils.styles import inject_dashboard_css
+from utils.styles import inject_dashboard_css, section_label
 
 st.set_page_config(page_title="Geographic Analysis | Respondex", layout="wide", page_icon="📊")
 inject_dashboard_css()
 
 st.title("Geographic Analysis")
-st.caption("Neighborhood-level incident patterns and SLA performance across Boston")
+st.caption("Neighborhood-level incident patterns and SLA performance across Boston · 2024–2025")
+
+st.markdown("<br>", unsafe_allow_html=True)
 
 try:
     hood_data = get_neighborhood_data()
@@ -31,6 +33,7 @@ map_data = hood_data.dropna(subset=["latitude", "longitude"]).copy()
 map_data = map_data[map_data["neighborhood"].notna()]
 
 # --- KPI row ---
+section_label("Overview")
 k1, k2, k3 = st.columns(3)
 k1.metric("Neighborhoods", f"{hood_data['neighborhood'].nunique()}")
 
@@ -44,6 +47,8 @@ if not worst_sla.empty:
 st.divider()
 
 # --- Interactive Map ---
+st.markdown("<br>", unsafe_allow_html=True)
+section_label("Incident Map")
 st.subheader("Incident Density Map")
 
 # Aggregate by neighborhood for map (sum incidents, weighted avg SLA)
@@ -106,6 +111,8 @@ st.plotly_chart(fig, use_container_width=True)
 st.divider()
 
 # --- Neighborhood Rankings ---
+st.markdown("<br>", unsafe_allow_html=True)
+section_label("Rankings")
 col_left, col_right = st.columns(2)
 
 with col_left:
@@ -135,7 +142,8 @@ with col_right:
 
 # --- Key Takeaways ---
 st.divider()
-st.subheader("Key Takeaways")
+section_label("Key Takeaways")
+st.markdown("<br>", unsafe_allow_html=True)
 
 if not map_agg.empty:
     top_vol = map_agg.nlargest(3, "total_incidents")

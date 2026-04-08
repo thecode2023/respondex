@@ -8,13 +8,13 @@ import pandas as pd
 import plotly.express as px
 from utils.db import get_daily_trends, get_monthly_trends, query
 from utils.charts import line_chart, bar_chart, apply_theme, COLORS, PALETTE
-from utils.styles import inject_dashboard_css
+from utils.styles import inject_dashboard_css, section_label
 
 st.set_page_config(page_title="Time Series | Respondex", layout="wide", page_icon="📊")
 inject_dashboard_css()
 
 st.title("Time Series Analysis")
-st.caption("Temporal patterns, seasonality, and operational rhythm")
+st.caption("Temporal patterns, seasonality, and operational rhythm · 2024–2025")
 
 try:
     daily = get_daily_trends()
@@ -39,6 +39,7 @@ with st.sidebar:
 daily_f = daily[daily["year"].isin(selected_years)]
 
 # --- Daily volume with moving averages ---
+section_label("Daily Volume")
 st.subheader("Daily Incident Volume")
 daily_f = daily_f.copy()
 daily_f["7d_avg"] = daily_f["total_incidents"].rolling(7, min_periods=1).mean()
@@ -63,6 +64,8 @@ st.plotly_chart(fig, use_container_width=True)
 st.divider()
 
 # --- Day of Week Pattern ---
+st.markdown("<br>", unsafe_allow_html=True)
+section_label("Day of Week")
 col_left, col_right = st.columns(2)
 
 with col_left:
@@ -91,6 +94,8 @@ with col_right:
     st.plotly_chart(fig, use_container_width=True)
 
 # --- Monthly Seasonality (overlay years) ---
+st.markdown("<br>", unsafe_allow_html=True)
+section_label("Seasonality")
 st.subheader("Monthly Seasonality")
 if not monthly.empty:
     monthly_f = monthly[monthly["year"].isin(selected_years)].copy()
@@ -112,6 +117,8 @@ if not monthly.empty:
     st.plotly_chart(fig, use_container_width=True)
 
 # --- Weekend vs Weekday ---
+st.markdown("<br>", unsafe_allow_html=True)
+section_label("Weekend vs Weekday")
 st.subheader("Weekend vs Weekday Performance")
 wkend = daily_f.groupby("is_weekend", as_index=False).agg(
     avg_incidents=("total_incidents", "mean"),
@@ -129,7 +136,8 @@ with c2:
 
 # --- Key Takeaways ---
 st.divider()
-st.subheader("Key Takeaways")
+section_label("Key Takeaways")
+st.markdown("<br>", unsafe_allow_html=True)
 
 weekday_avg = wkend[wkend["label"] == "Weekday"]["avg_incidents"].values[0]
 weekend_avg_val = wkend[wkend["label"] == "Weekend"]["avg_incidents"].values[0] if not wkend[wkend["label"] == "Weekend"].empty else 0

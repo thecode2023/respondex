@@ -7,13 +7,15 @@ import streamlit as st
 import pandas as pd
 from utils.db import get_category_breakdown, get_unique_category_groups
 from utils.charts import bar_chart, donut_chart, COLORS
-from utils.styles import inject_dashboard_css
+from utils.styles import inject_dashboard_css, section_label
 
 st.set_page_config(page_title="Category Deep Dive | Respondex", layout="wide", page_icon="📊")
 inject_dashboard_css()
 
 st.title("Category Deep Dive")
-st.caption("Incident distribution and SLA performance by service category")
+st.caption("Incident distribution and SLA performance by service category · 2024–2025")
+
+st.markdown("<br>", unsafe_allow_html=True)
 
 try:
     cat_data = get_category_breakdown()
@@ -38,6 +40,7 @@ if filtered.empty:
     st.stop()
 
 # --- KPI row for filtered data ---
+section_label("Filtered Metrics")
 k1, k2, k3 = st.columns(3)
 total = filtered["total_incidents"].sum()
 avg_sla = (filtered["sla_pct"] * filtered["total_incidents"]).sum() / total if total else 0
@@ -50,6 +53,7 @@ k3.metric("Weighted Avg Resolution", f"{avg_res:.0f} hrs")
 st.divider()
 
 # --- Category Group Distribution ---
+section_label("Distribution")
 col_left, col_right = st.columns(2)
 
 with col_left:
@@ -82,6 +86,8 @@ with col_right:
     st.plotly_chart(fig, use_container_width=True)
 
 # --- Top 15 Specific Types ---
+st.markdown("<br>", unsafe_allow_html=True)
+section_label("Volume Leaders")
 st.subheader("Top 15 Incident Types")
 top_types = filtered.nlargest(15, "total_incidents")
 
@@ -96,6 +102,8 @@ fig.update_layout(height=500)
 st.plotly_chart(fig, use_container_width=True)
 
 # --- Worst SLA performers ---
+st.markdown("<br>", unsafe_allow_html=True)
+section_label("SLA Failures")
 st.subheader("Worst SLA Performers (min 100 incidents)")
 min_vol = filtered[filtered["total_incidents"] >= 100]
 if not min_vol.empty:
@@ -111,7 +119,8 @@ if not min_vol.empty:
 
 # --- Key Takeaways ---
 st.divider()
-st.subheader("Key Takeaways")
+section_label("Key Takeaways")
+st.markdown("<br>", unsafe_allow_html=True)
 
 if not filtered.empty:
     top_type = filtered.nlargest(1, "total_incidents").iloc[0]

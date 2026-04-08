@@ -397,7 +397,8 @@ st.markdown(f"""
     <h1 class="hero-title">Respondex</h1>
     <p class="hero-subtitle">
         How well does Boston respond to its residents?
-        550,000+ service requests. Two years of data. One answer.
+        550,000+ service requests analyzed across 24 neighborhoods.
+        SLA compliance, resolution times, and operational patterns — mapped, measured, and visualized.
     </p>
     <div class="hero-divider"></div>
     <div class="hero-metrics">

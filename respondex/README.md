@@ -95,6 +95,8 @@ Star schema with a central fact table and four dimension tables:
 
 Pre-aggregated tables (`agg_monthly`, `agg_by_category`, `agg_by_neighborhood`, `agg_daily`) power the dashboard for sub-second load times.
 
+**[See the full data dictionary →](docs/data_dictionary.md)**
+
 ---
 
 ## Design Decisions
